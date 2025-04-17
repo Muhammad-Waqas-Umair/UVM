@@ -1,4 +1,5 @@
 // ---------------------- D FLIP-FLOP DESIGN -------------------------
+
 module d_ff (
     input clock,
     input reset,       
@@ -16,6 +17,7 @@ module d_ff (
 endmodule
 
 // ---------------------- DFF INTERFACE -------------------------
+
 interface dff_interface();
     logic clock;
     logic reset;

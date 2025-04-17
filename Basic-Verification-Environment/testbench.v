@@ -2,6 +2,7 @@
 import uvm_pkg::*;
 
 // ---------------------- SEQUENCE ITEM -------------------------
+
 class Sequence_Item extends uvm_sequence_item;
     rand bit reset;
     rand bit data_in;
@@ -19,6 +20,7 @@ class Sequence_Item extends uvm_sequence_item;
 endclass
 
 // ---------------------- SEQUENCE -------------------------
+
 class Inactive_Reset_Seq extends uvm_sequence#(Sequence_Item);
     `uvm_object_utils(Inactive_Reset_Seq)
 
@@ -80,15 +82,20 @@ class Random_Seq extends uvm_sequence#(Sequence_Item);
 endclass
 
 // ---------------------- SEQUENCER -------------------------
+
 class My_Sequencer extends uvm_sequencer #(Sequence_Item);
     `uvm_component_utils(My_Sequencer)
 
+    uvm_analysis_port #(Sequence_Item) Aobj;
+
     function new(string Name = "My_Sequencer", uvm_component parent = null);
         super.new(Name, parent);
+        Aobj = new("Aobj", this);
     endfunction
 endclass
 
 // ---------------------- DRIVER -------------------------
+
 class My_Driver extends uvm_driver #(Sequence_Item);
     `uvm_component_utils(My_Driver)
 
@@ -120,6 +127,7 @@ class My_Driver extends uvm_driver #(Sequence_Item);
 endclass
 
 // ---------------------- MONITOR -------------------------
+
 class My_Monitor extends uvm_monitor;
     `uvm_component_utils(My_Monitor)
 
@@ -152,7 +160,8 @@ class My_Monitor extends uvm_monitor;
     endtask
 endclass
 
-// ---------------------- CONFIG CLASS -------------------------
+// ---------------------- CONFIGURATION -------------------------
+
 class Config_Dff extends uvm_object;
     `uvm_object_utils(Config_Dff)
 
@@ -163,7 +172,7 @@ class Config_Dff extends uvm_object;
     endfunction
 endclass
 
-// ---------------------- AGENT -------------------------
+// ---------------------- AGENT --------------------------------
 class My_Agent extends uvm_agent;
     `uvm_component_utils(My_Agent)
 
@@ -185,11 +194,12 @@ class My_Agent extends uvm_agent;
     virtual function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
         D.seq_item_port.connect(S.seq_item_export);
-        M.Aobj.connect(s.A_obj);
+        M.Aobj.connect(S.Aobj);  // Correcting this line
     endfunction
 endclass
 
 // ---------------------- SCOREBOARD -------------------------
+
 class My_Scoreboard extends uvm_scoreboard;
     `uvm_component_utils(My_Scoreboard)
 
@@ -219,6 +229,7 @@ class My_Scoreboard extends uvm_scoreboard;
 endclass
 
 // ---------------------- ENVIRONMENT -------------------------
+
 class My_Env extends uvm_env;
     `uvm_component_utils(My_Env)
 
@@ -242,6 +253,7 @@ class My_Env extends uvm_env;
 endclass
 
 // ---------------------- TEST -------------------------
+
 class My_Test extends uvm_test;
     `uvm_component_utils(My_Test)
 
