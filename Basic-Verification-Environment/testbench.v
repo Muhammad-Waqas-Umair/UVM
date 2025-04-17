@@ -19,7 +19,7 @@ class Sequence_Item extends uvm_sequence_item;
     endfunction
 endclass
 
-// ---------------------- SEQUENCE -------------------------
+// ---------------------- SEQUENCE ------------------------------
 
 class Inactive_Reset_Seq extends uvm_sequence#(Sequence_Item);
     `uvm_object_utils(Inactive_Reset_Seq)
@@ -81,7 +81,7 @@ class Random_Seq extends uvm_sequence#(Sequence_Item);
     endtask
 endclass
 
-// ---------------------- SEQUENCER -------------------------
+// ---------------------- SEQUENCER ------------------------------
 
 class My_Sequencer extends uvm_sequencer #(Sequence_Item);
     `uvm_component_utils(My_Sequencer)
@@ -94,7 +94,7 @@ class My_Sequencer extends uvm_sequencer #(Sequence_Item);
     endfunction
 endclass
 
-// ---------------------- DRIVER -------------------------
+// ---------------------- DRIVER ----------------------------------
 
 class My_Driver extends uvm_driver #(Sequence_Item);
     `uvm_component_utils(My_Driver)
@@ -126,7 +126,7 @@ class My_Driver extends uvm_driver #(Sequence_Item);
     endtask
 endclass
 
-// ---------------------- MONITOR -------------------------
+// ---------------------- MONITOR ----------------------------------
 
 class My_Monitor extends uvm_monitor;
     `uvm_component_utils(My_Monitor)
@@ -160,7 +160,7 @@ class My_Monitor extends uvm_monitor;
     endtask
 endclass
 
-// ---------------------- CONFIGURATION -------------------------
+// ---------------------- AGENT CONFIGURATION -----------------------
 
 class Config_Dff extends uvm_object;
     `uvm_object_utils(Config_Dff)
@@ -172,7 +172,7 @@ class Config_Dff extends uvm_object;
     endfunction
 endclass
 
-// ---------------------- AGENT --------------------------------
+// ---------------------- AGENT ----------------------------------
 class My_Agent extends uvm_agent;
     `uvm_component_utils(My_Agent)
 
@@ -198,7 +198,7 @@ class My_Agent extends uvm_agent;
     endfunction
 endclass
 
-// ---------------------- SCOREBOARD -------------------------
+// ---------------------- SCOREBOARD -----------------------------
 
 class My_Scoreboard extends uvm_scoreboard;
     `uvm_component_utils(My_Scoreboard)
@@ -228,7 +228,7 @@ class My_Scoreboard extends uvm_scoreboard;
     endfunction
 endclass
 
-// ---------------------- ENVIRONMENT -------------------------
+// ---------------------- ENVIRONMENT ------------------------------
 
 class My_Env extends uvm_env;
     `uvm_component_utils(My_Env)
@@ -252,7 +252,7 @@ class My_Env extends uvm_env;
     endfunction
 endclass
 
-// ---------------------- TEST -------------------------
+// ---------------------- TEST -------------------------------------
 
 class My_Test extends uvm_test;
     `uvm_component_utils(My_Test)
@@ -294,7 +294,7 @@ class My_Test extends uvm_test;
     endtask
 endclass
 
-// ---------------------- TB TOP MODULE -------------------------
+// ---------------------- TB TOP MODULE ---------------------------
 
 module tb_top;
     bit clock;
