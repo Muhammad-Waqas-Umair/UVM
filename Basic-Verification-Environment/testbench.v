@@ -179,22 +179,28 @@ class My_Agent extends uvm_agent;
     My_Sequencer S;
     My_Driver D;
     My_Monitor M;
-
+    Config_Dff C;
     function new(string Name = "My_Agent", uvm_component parent = null);
         super.new(Name, parent);
     endfunction
 
-    virtual function void build_phase(uvm_phase phase);
-        super.build_phase(phase);
-        S = My_Sequencer::type_id::create("S", this);
+ virtual function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+    M = My_Monitor::type_id::create("M", this);
+    C = Config_Dff::type_id::create("C", this);
+   if (!uvm_config_db#(Config_Dff)::get(this, "", "Agent_Configuration", C))
+        `uvm_fatal(get_type_name(), "Failed to access config");  // Use backtick (`) for macros
+    if (C.is_active == UVM_ACTIVE) begin
         D = My_Driver::type_id::create("D", this);
-        M = My_Monitor::type_id::create("M", this);
-    endfunction
+        S = My_Sequencer::type_id::create("S", this);
+    end
+endfunction
 
     virtual function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
+        if (C.is_active == UVM_ACTIVE) begin
         D.seq_item_port.connect(S.seq_item_export);
-        M.Aobj.connect(S.Aobj);  // Correcting this line
+        end 
     endfunction
 endclass
 
